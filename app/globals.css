@@ -6,7 +6,9 @@
 
   --font-serif: "Playfair Display", Georgia, serif;
 }
-
+@theme {
+  --animate-pulse-slow: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
 @layer base {
   body {
     font-family: 'Inter', system-ui, sans-serif;
@@ -24,7 +26,10 @@
     0%, 100% { box-shadow: 0 0 20px #facc15, 0 0 40px #facc15; }
     50% { box-shadow: 0 0 40px #facc15, 0 0 80px #facc15; }
   }
-
+@keyframes loading {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
   .animate-gold-pulse {
     animation: gold-pulse 3s ease-in-out infinite;
   }

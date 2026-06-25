@@ -4,33 +4,34 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
-import { toast } from 'react-toastify';
 import Input from '@/app/components/ui/Input';
 import Button from '@/app/components/ui/Button';
 import Link from 'next/link';
+import { useForgotPassword } from '@/app/hooks/useAuth';
 
-// 1. Schema for email validation
 const forgotPasswordSchema = z.object({
   email: z.string().email("Please enter a valid email address"),
 });
 
 export default function ForgotPasswordPage() {
+  const { mutate: forgotPassword, isPending } = useForgotPassword();
+
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors },
   } = useForm({
     resolver: zodResolver(forgotPasswordSchema),
   });
 
   const onSubmit = (data: any) => {
-    toast.success("Password reset link sent to your email!");
+    forgotPassword(data);
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
       <div className="space-y-2">
-        <h2 className="text-2xl font-black uppercase tracking-tighter">Reset Password</h2>
+        <h2 className="text-2xl font-black uppercase tracking-tighter">Forgot Password</h2>
         <p className="text-sm text-zinc-400">
           Enter your email to receive a secure reset link.
         </p>
@@ -43,8 +44,8 @@ export default function ForgotPasswordPage() {
         error={errors.email?.message as string}
       />
       
-      <Button disabled={isSubmitting} type="submit">
-        {isSubmitting ? "SENDING..." : "SEND RESET LINK"}
+      <Button isLoading={isPending} disabled={isPending} type="submit">
+        {isPending ? "SENDING..." : "SEND RESET LINK"}
       </Button>
 
       <div className="text-center">

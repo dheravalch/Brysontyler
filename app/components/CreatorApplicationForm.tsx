@@ -1,55 +1,79 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+"use client";
+
+import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
 import { toast } from "react-toastify";
 import Button from "./ui/Button";
 import Input from "./ui/Input";
-import * as z from 'zod';
-import { zodResolver } from "@hookform/resolvers/zod";
-const creatorSchema = z.object({
-  legalName: z.string().min(2, "Legal name is required"),
-  idDocument: z
-    .any()
-    .refine((files) => files?.length > 0, "ID Document is required")
-    .refine((files) => files?.[0]?.size <= 5000000, "Max file size is 5MB")
-    .refine(
-      (files) => ["image/jpeg", "image/png", "application/pdf"].includes(files?.[0]?.type),
-      "Only JPG, PNG, or PDF allowed"
-    ),
+import ManualVerificationModal from "./modals/ManualVerificationModal";
+
+// Define the validation schema for Step 1
+const accountSchema = z.object({
+  fullName: z.string().min(2, "Full name is required"),
+  email: z.string().email("Invalid email address"),
+  password: z.string().min(6, "Password must be at least 6 characters"),
+  confirmPassword: z.string()
+}).refine((data) => data.password === data.confirmPassword, {
+  message: "Passwords do not match",
+  path: ["confirmPassword"],
 });
 
-export const CreatorApplicationForm = () => {
+export const CreatorApplicationWizard = () => {
+  const [step, setStep] = useState(1);
+  const [showManualModal, setShowManualModal] = useState(false);
+
   const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm({
-    resolver: zodResolver(creatorSchema),
+    resolver: zodResolver(accountSchema),
+    mode: "onChange"
   });
 
-  const onSubmit = () => {
-    toast.success("Application submitted! We'll review your documents.");
+  const onNext = async (data: any) => {
+    if (step === 1) {
+      console.log("Account Details:", data);
+      setStep(2);
+    }
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 animate-in fade-in duration-300">
-      <Input
-        {...register("legalName")} 
-        placeholder="Legal Name" 
-        error={errors.legalName?.message as string}
-      />
+    
+    <div>
       
-      <div className="flex flex-col gap-2">
-        <div className={`border border-dashed p-4 rounded-xl text-center ${errors.idDocument ? 'border-red-500' : 'border-white/10 bg-zinc-950'}`}>
-          <p className="text-zinc-500 text-sm mb-2">Government Issued ID</p>
-          <input 
-            type="file" 
-            {...register("idDocument")}
-            className="text-sm text-zinc-400 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-zinc-800 file:text-white" 
-          />
-        </div>
-        {errors.idDocument && (
-          <p className="text-red-500 text-[10px] font-bold uppercase tracking-widest">{String(errors.idDocument.message)}</p>
+      {showManualModal && (
+        <ManualVerificationModal 
+          onClose={() => setShowManualModal(false)} 
+          onSuccess={() => toast.success("Submission received!")}
+        />
+      )}
+     
+
+      <form onSubmit={handleSubmit(onNext)} className="space-y-6">
+        {step === 1 && (
+          <div className="space-y-4 animate-in fade-in duration-300">
+          
+            <Input {...register("fullName")} placeholder="Full Name" error={errors.fullName?.message as string} />
+            <Input {...register("email")} placeholder="Email Address" error={errors.email?.message as string} />
+            <Input type="password" {...register("password")} placeholder="Password" error={errors.password?.message as string} />
+            <Button type="submit" disabled={isSubmitting}>CONTINUE</Button>
+          </div>
         )}
-      </div>
-      
-      <Button disabled={isSubmitting} type="submit">
-        {isSubmitting ? "SUBMITTING..." : "SAVE AND SUBMIT APPLICATION"}
-      </Button>
-    </form>
+
+        {step === 2 && (
+          <div className="space-y-6 text-center animate-in slide-in-from-right-4">
+            <h2 className="text-2xl font-black">Identity Verification</h2>
+            <p className="text-zinc-400 text-sm">Verify your profile to unlock features.</p>
+            <Button type="button" onClick={() => setShowManualModal(true)} className="w-full bg-yellow-500 text-black font-bold">
+              VERIFY NOW
+            </Button>
+            <Button type="button" variant="ghost" onClick={() => setStep(1)} className="w-full">
+              BACK
+            </Button>
+          </div>
+        )}
+      </form>
+
+    </div>
   );
 };

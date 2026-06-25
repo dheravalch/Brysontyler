@@ -33,10 +33,10 @@ export default function Button({
     <button
       {...props}
       disabled={isLoading || props.disabled}
-      className={`${baseStyles} ${variants[variant]} ${className}`}
+      className={`${baseStyles} ${variants[variant]} ${className} `}
     >
-      {isLoading && <Loader2 className="animate-spin" size={20} />}
       {children}
+      {isLoading && <Loader2 className="animate-spin" size={20} />}
     </button>
   );
 }
