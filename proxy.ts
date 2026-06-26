@@ -12,7 +12,7 @@ const authRoutes = [
 
 const protectedRoutes = ["/admin", "/dashboard"];
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const cookieStore = await import("next/headers").then((m) => m.cookies());
   const token = cookieStore.get("token")?.value;
   const { pathname } = request.nextUrl;
