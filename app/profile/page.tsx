@@ -87,7 +87,7 @@ export default function AccountPage() {
           
           type="password"
           placeholder="New Password" 
-          error={errors.password?.message}
+          error={errors.newPassword?.message}
         />
 
         <Input 

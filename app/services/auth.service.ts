@@ -23,8 +23,8 @@ export const forgotPassword = (payload: { email: string }) => {
     payload,
   );
 };
-export const ChangePassword = (payload: { password: string }) => {
-  return httpPost<SuccessResponse, {password: string }>(
+export const ChangePassword = (payload: { newPassword: string; currentPassword:string; }) => {
+  return httpPost<SuccessResponse, {newPassword: string;  currentPassword:string;  }>(
     "/api/auth/change-password",
     payload,
   );
