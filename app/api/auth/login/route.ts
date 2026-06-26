@@ -1,7 +1,7 @@
 import { log } from "console";
 import { NextResponse } from "next/server";
 
-const BASE_URL = process.env.SERVER_BASE_URL;
+const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL;
 
 export async function POST(req: Request) {
   const body = await req.json();

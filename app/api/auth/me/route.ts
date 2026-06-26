@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 
-const BASE_URL = process.env.SERVER_BASE_URL;
+const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL;
 
 export async function GET() {
   const cookieStore = cookies();
