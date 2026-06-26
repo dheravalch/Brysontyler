@@ -10,7 +10,7 @@
    "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "deploy": "npm run deploy"
+    "deploy": "npx @opennextjs/cloudflare deploy"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.4.0",
