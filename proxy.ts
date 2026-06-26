@@ -9,12 +9,11 @@ const authRoutes = [
   "/forgot-password",
 ];
 
-
 const protectedRoutes = ["/admin", "/dashboard"];
 
-export async function proxy(request: NextRequest) {
-  const cookieStore = await import("next/headers").then((m) => m.cookies());
-  const token = cookieStore.get("token")?.value;
+export function proxy(request: NextRequest) {
+
+  const token = request.cookies.get("token")?.value;
   const { pathname } = request.nextUrl;
 
   const isAuthRoute = authRoutes.includes(pathname);
@@ -23,11 +22,9 @@ export async function proxy(request: NextRequest) {
     pathname.startsWith(route),
   );
 
-
   if (token && isAuthRoute) {
     return NextResponse.redirect(new URL("/home", request.url));
   }
-
 
   if (!token && isProtectedRoute) {
     return NextResponse.redirect(new URL("/home", request.url));
@@ -37,7 +34,7 @@ export async function proxy(request: NextRequest) {
 }
 
 export const config = {
-  runtime: 'edge',
+  runtime: 'experimental-edge',
   matcher: [
     "/login",
     "/register",
