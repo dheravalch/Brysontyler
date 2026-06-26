@@ -28,7 +28,7 @@ export async function GET() {
 
   if (!response.ok) {
     return NextResponse.json(
-      { message: data.message || "Failed to fetch user profile" },
+      { message: data.error || "Failed to fetch user profile" },
       { status: response.status }
     );
   }

@@ -21,7 +21,7 @@ export async function POST(
 
   if (!response.ok) {
     return NextResponse.json(
-      { message: data.message || "Reset failed" },
+      { message: data.error || "Reset failed" },
       { status: response.status }
     );
   }

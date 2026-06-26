@@ -16,10 +16,11 @@ export async function POST(req: Request) {
   });
 
   const data = await response.json();
+console.log();
 
   if (!response.ok) {
     return NextResponse.json(
-      { message: data.message || "Login failed" },
+      { message: data.error || "Login failed" },
       { status: response.status },
     );
   }

@@ -30,7 +30,7 @@ export async function POST(req: Request) {
 
   if (!response.ok) {
     return NextResponse.json(
-      { message: data.message || "Request failed" },
+      { message: data.error || "Request failed" },
       { status: response.status },
     );
   }
