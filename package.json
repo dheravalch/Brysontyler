@@ -2,9 +2,12 @@
   "name": "brysontyler",
   "version": "0.1.0",
   "private": true,
+  "overrides": {
+    "next": "$next"
+  },
   "scripts": {
     "dev": "next dev",
-   "build": "npm install --legacy-peer-deps && @cloudflare/next-on-pages",
+    "build": "@cloudflare/next-on-pages",
     "start": "next start",
     "lint": "eslint"
   },
