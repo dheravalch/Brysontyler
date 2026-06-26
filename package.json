@@ -7,10 +7,11 @@
   },
   "scripts": {
     "dev": "next dev",
-    "build": "next build && opennextjs-cloudflare build",
+    "build": "next build",
+    "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
+    "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
     "start": "next start",
-    "lint": "eslint",
-    "deploy": "opennextjs-cloudflare deploy"
+    "lint": "eslint"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.4.0",
