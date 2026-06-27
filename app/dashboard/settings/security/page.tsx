@@ -18,7 +18,6 @@ export default function Security() {
       </div>
 
       <div className="space-y-6">
-        {/* Password Section */}
         <div className="bg-black p-6 rounded-2xl border border-white/5 flex items-center justify-between">
           <div className="flex items-center gap-4">
             <div className="bg-zinc-800 p-3 rounded-xl"><Key size={20} className="text-yellow-500" /></div>
@@ -35,7 +34,6 @@ export default function Security() {
           </button>
         </div>
 
-        {/* Danger Zone */}
         <div className="border border-red-500/20 bg-red-500/5 p-6 rounded-2xl">
           <div className="flex items-center gap-3 text-red-500 mb-4">
             <ShieldAlert size={20} />
@@ -50,8 +48,6 @@ export default function Security() {
           </button>
         </div>
       </div>
-
-      {/* Change Password Modal */}
       {showPasswordModal && (
         <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-6">
           <div className="bg-zinc-900 border border-white/10 p-8 rounded-3xl max-w-sm w-full space-y-4">
@@ -66,7 +62,6 @@ export default function Security() {
         </div>
       )}
 
-      {/* Delete Confirmation Modal */}
       {showDeleteModal && (
         <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-6">
           <div className="bg-zinc-900 border border-white/10 p-8 rounded-3xl max-w-sm w-full">

@@ -19,13 +19,11 @@ export default function Subscription() {
 
   return (
     <div className="space-y-8">
-      {/* Header */}
       <div>
         <h2 className="text-2xl font-black">Subscription Management</h2>
         <p className="text-zinc-400 text-sm mt-1">Manage your BTP billing cycles and plan details.</p>
       </div>
 
-      {/* Main Subscription Card */}
       <div className="bg-gradient-to-br from-zinc-900 to-black border border-white/10 p-8 rounded-3xl relative overflow-hidden">
         <div className="flex justify-between items-start mb-8">
           <div>
@@ -40,7 +38,6 @@ export default function Subscription() {
           </div>
         </div>
 
-        {/* Usage Stats */}
         <div className="grid grid-cols-2 gap-4 mb-8">
           <div className="bg-black/40 p-4 rounded-xl border border-white/5">
             <p className="text-zinc-500 text-[10px] font-bold uppercase">Storage Used</p>
@@ -51,8 +48,6 @@ export default function Subscription() {
             <p className="font-black mt-1">1,284 Active</p>
           </div>
         </div>
-
-        {/* Actions */}
         <div className="flex gap-4">
           <button 
             onClick={() => handleAction("Upgrade")}
@@ -69,7 +64,6 @@ export default function Subscription() {
         </div>
       </div>
 
-      {/* Payment Method */}
       <div className="flex items-center justify-between p-6 bg-black rounded-2xl border border-white/5">
         <div className="flex items-center gap-4">
           <div className="bg-zinc-800 p-3 rounded-xl"><CreditCard size={20} /></div>
@@ -86,7 +80,6 @@ export default function Subscription() {
         </button>
       </div>
 
-      {/* Update Card Modal */}
       {showCardModal && (
         <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-6 backdrop-blur-sm">
           <div className="bg-zinc-900 border border-white/10 p-8 rounded-3xl max-w-sm w-full space-y-4">

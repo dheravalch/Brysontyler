@@ -46,7 +46,6 @@ export default function PayoutHistory() {
         </div>
       </div>
 
-      {/* Table Container */}
       <div className="bg-zinc-900/40 border border-white/5 rounded-3xl overflow-hidden backdrop-blur-sm">
         <div className="px-8 py-5 border-b border-white/5 flex justify-between items-center">
           <h4 className="text-[10px] font-black text-white uppercase tracking-[0.2em]">

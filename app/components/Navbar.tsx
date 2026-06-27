@@ -50,7 +50,6 @@ export default function Navbar() {
             {isInitializing ? <AnimatedPulseLoader className="w-32 h-10 rounded-full" /> : renderActions(false)}
           </div>
 
-          {/* Mobile Hamburger */}
           <button className="md:hidden p-2 text-white" onClick={() => setIsMenuOpen(!isMenuOpen)}>
             {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
           </button>

@@ -36,7 +36,6 @@ export default function FollowingPage() {
             key={sub.id} 
             className="group relative bg-zinc-900 rounded-3xl overflow-hidden border border-zinc-800 hover:border-yellow-500/50 transition-all cursor-pointer"
           >
-            {/* Background Image using next/image */}
             <div className="h-40 w-full relative">
               <Image 
                 src={sub.image} 
@@ -47,7 +46,6 @@ export default function FollowingPage() {
               <div className="absolute inset-0 bg-gradient-to-t from-zinc-900 to-transparent" />
             </div>
 
-            {/* Content */}
             <div className="p-6 -mt-10 relative z-10">
               <div className="w-16 h-16 rounded-2xl border-4 border-zinc-900 overflow-hidden mb-4 shadow-xl relative">
                 <Image 

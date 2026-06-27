@@ -20,7 +20,6 @@ export default function CreatorCard({
       onClick={onClick} 
       className="group relative bg-[#0a0a0a] rounded-3xl overflow-hidden cursor-pointer border border-white/[0.05] shadow-2xl hover:border-yellow-400/20 transition-all duration-500"
     >
-      {/* Cover Image Container */}
       <div className="relative w-full h-64 overflow-hidden">
         <Image 
           src={cover} 
@@ -29,13 +28,10 @@ export default function CreatorCard({
           className="object-cover transition-transform duration-[2s] ease-out group-hover:scale-105" 
         />
         
-        {/* Darkening Layer: Added extra black opacity for deeper shadows */}
         <div className="absolute inset-0 bg-black/40" />
         
-        {/* Layered Gradient for depth */}
         <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent opacity-90" />
         
-        {/* Top Floating Badge Group */}
         <div className="absolute top-4 left-4 right-4 flex justify-between items-start">
           {online ? (
             <div className="bg-black/40 backdrop-blur-xl border border-white/10 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest flex items-center gap-2 text-emerald-400">
@@ -57,7 +53,6 @@ export default function CreatorCard({
         </div>
       </div>
 
-      {/* Info Overlay */}
       <div className="px-6 py-6 -mt-10 relative z-10 bg-gradient-to-b from-transparent to-[#0a0a0a]">
         <h3 className="text-xl font-black tracking-tighter text-white mb-1 group-hover:text-yellow-400 transition-colors">
           {name}
@@ -72,7 +67,6 @@ export default function CreatorCard({
         </div>
       </div>
 
-      {/* Subtle bottom border glow on hover */}
       <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-yellow-400/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
     </div>
   );

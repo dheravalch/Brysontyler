@@ -46,18 +46,15 @@ const toggleTrack = async (type: 'video' | 'audio') => {
     : streamRef.current.getAudioTracks();
 
   tracks.forEach((track) => {
-    // If the track is enabled, we stop it completely to kill the hardware
     if (track.enabled) {
-      track.stop(); // This is the key: it kills the camera light
+      track.stop(); 
     }
   });
 
-  // Update state
   if (type === 'video') {
     if (isVideoEnabled) {
       setIsVideoEnabled(false);
     } else {
-      // Re-initialize only if we want to turn it back on
       await initStream(); 
       setIsVideoEnabled(true);
     }
@@ -188,7 +185,6 @@ const handleExit = () => {
         </div>
       </aside>
 
-      {/* Modals remain the same */}
       {showTipModal && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
           <div className="bg-zinc-900 p-8 rounded-3xl w-full max-w-xs border border-white/10">

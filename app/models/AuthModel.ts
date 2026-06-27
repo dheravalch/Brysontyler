@@ -38,8 +38,6 @@ export interface User {
     verified: boolean;
     socialLinks: string[];
   };
-
-  // Timestamps
   createdAt: string;
 }
 export interface SuccessResponse {

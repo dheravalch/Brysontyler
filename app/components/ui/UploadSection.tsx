@@ -12,7 +12,6 @@ export function UploadSection({
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       const newFiles = Array.from(e.target.files);
-      // If passport, only keep the first one selected
       setFiles(isPassport ? [newFiles[0]] : [...files, ...newFiles]);
     }
   };

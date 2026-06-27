@@ -5,9 +5,15 @@ import { motion, AnimatePresence } from "framer-motion";
 import SubscribeModal from "./modals/SubscribeModal";
 
 const MEDIA_ASSETS = [
-  { type: "image", src: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=1920&q=80" },
+  {
+    type: "image",
+    src: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=1920&q=80",
+  },
   { type: "video", src: "https://www.w3schools.com/html/mov_bbb.mp4" },
-  { type: "image", src: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=1920&q=80" },
+  {
+    type: "image",
+    src: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=1920&q=80",
+  },
 ];
 
 export default function Hero() {
@@ -23,7 +29,6 @@ export default function Hero() {
 
   return (
     <section className="relative lg:min-h-screen lg:mt-18 mt-20 flex items-center justify-center text-center overflow-hidden">
-      {/* Background Media */}
       <div className="absolute inset-0 z-0">
         <AnimatePresence mode="wait">
           <motion.div
@@ -35,13 +40,21 @@ export default function Hero() {
             className="absolute inset-0"
           >
             {MEDIA_ASSETS[currentIndex].type === "video" ? (
-              <video autoPlay muted loop playsInline className="w-full h-full object-cover">
+              <video
+                autoPlay
+                muted
+                loop
+                playsInline
+                className="w-full h-full object-cover"
+              >
                 <source src={MEDIA_ASSETS[currentIndex].src} type="video/mp4" />
               </video>
             ) : (
               <div
                 className="w-full h-full bg-center bg-cover bg-no-repeat"
-                style={{ backgroundImage: `url('${MEDIA_ASSETS[currentIndex].src}')` }}
+                style={{
+                  backgroundImage: `url('${MEDIA_ASSETS[currentIndex].src}')`,
+                }}
               />
             )}
           </motion.div>
@@ -50,10 +63,8 @@ export default function Hero() {
         <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-black/90" />
       </div>
 
-      {/* Hero Content */}
       <div className="relative max-w-4xl mx-auto px-6 z-10 flex flex-col items-center">
-        {/* Top Badge */}
-        <motion.div 
+        <motion.div
           initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           className="inline-flex items-center gap-2 bg-white/5 backdrop-blur-md border border-white/10 px-4 py-1.5 rounded-full mb-10 shadow-2xl"
@@ -64,7 +75,6 @@ export default function Hero() {
           </span>
         </motion.div>
 
-        {/* Heading */}
         <h2 className="text-5xl sm:text-7xl md:text-[5rem] font-black tracking-tighter leading-[0.9] mb-8 text-white drop-shadow-lg">
           YOUR ULTIMATE
           <br />
@@ -78,9 +88,8 @@ export default function Hero() {
           personalized connection.
         </p>
 
-        {/* CTA */}
-        <button 
-          onClick={() => setIsModalOpen(true)} 
+        <button
+          onClick={() => setIsModalOpen(true)}
           className="bg-yellow-400 hover:bg-yellow-300 text-black font-black text-lg px-12 py-5 rounded-2xl shadow-[0_0_40px_rgba(250,204,21,0.2)] hover:shadow-[0_0_60px_rgba(250,204,21,0.4)] transition-all active:scale-[0.97]"
         >
           START YOUR EXPERIENCE — $14.99/MO
@@ -93,8 +102,8 @@ export default function Hero() {
 
       {isModalOpen && (
         <SubscribeModal
-          creatorName="Bryson Tyler" 
-          onClose={() => setIsModalOpen(false)} 
+          creatorName="Bryson Tyler"
+          onClose={() => setIsModalOpen(false)}
         />
       )}
     </section>

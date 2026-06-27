@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Users, Search, MoreVertical, Trash2, Mail, Shield } from "lucide-react";
+import { Users, Search,Trash2, Mail, Shield } from "lucide-react";
 
 export default function SubscribersPage() {
   const [subscribers, setSubscribers] = useState([
@@ -25,7 +25,6 @@ export default function SubscribersPage() {
         </div>
       </header>
 
-      {/* Stats Cards */}
       <div className="grid grid-cols-3 gap-6 mb-12">
         {[{ label: "Active Revenue", val: "$12.4k" }, { label: "Churn Rate", val: "2.4%" }, { label: "Growth", val: "+14%" }].map((stat) => (
           <div key={stat.label} className="bg-zinc-900 border border-white/5 p-8 rounded-3xl">
@@ -34,8 +33,6 @@ export default function SubscribersPage() {
           </div>
         ))}
       </div>
-
-      {/* Subscribers Table */}
       <div className="bg-zinc-900 border border-white/5 rounded-3xl overflow-hidden">
         <div className="p-6 border-b border-white/5 flex items-center gap-4">
           <Search className="text-zinc-500" size={18} />

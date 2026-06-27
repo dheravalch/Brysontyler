@@ -15,7 +15,6 @@ export default function ProfileLayout({
 
   return (
     <div className="w-full min-h-screen">
-      {/* Sticky Header: Containerized to match grid */}
       <header className="sticky top-0 z-50 bg-black/80 backdrop-blur-md border-b border-zinc-800 mb-8">
         <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center gap-4">
@@ -41,9 +40,8 @@ export default function ProfileLayout({
         </div>
       </header>
 
-      {/* Main Layout Grid */}
       <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row gap-8 pb-12">
-        <nav className="md:w-[200px] flex-shrink-0">
+        <nav className="md:w-50 shrink-0">
           <div className="md:sticky md:top-28 flex flex-row md:flex-col overflow-x-auto gap-1 border-b md:border-b-0 border-zinc-800 pb-2 md:pb-0 scrollbar-hide">
             <ProfileSidebarLink href="/profile" label="Account" iconName="user" />
             <ProfileSidebarLink href="/profile/following" label="Creators" iconName="shield" />

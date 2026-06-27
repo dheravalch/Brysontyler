@@ -9,7 +9,6 @@ interface PaginationProps {
 }
 
 export default function Pagination({ currentPage, totalPages, onPageChange }: PaginationProps) {
-  // Logic to show a limited number of pages to prevent scattering
   const getPageNumbers = () => {
     const delta = 1;
     const range = [];
@@ -31,8 +30,6 @@ export default function Pagination({ currentPage, totalPages, onPageChange }: Pa
         >
           <ChevronLeft size={18} />
         </button>
-
-        {/* Page Numbers */}
         <div className="flex items-center gap-1">
           <button onClick={() => onPageChange(1)} className={`w-10 h-10 rounded-xl font-black text-xs transition-all ${currentPage === 1 ? 'bg-yellow-500 text-black' : 'bg-[#0a0a0a] border border-white/10 text-zinc-500 hover:text-white'}`}>1</button>
           

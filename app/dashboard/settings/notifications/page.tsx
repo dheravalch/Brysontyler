@@ -3,7 +3,6 @@
 import { useState } from "react";
 
 export default function Notifications() {
-  // Manage the state of each toggle
   const [settings, setSettings] = useState<Record<string, boolean>>({
     'Email Updates': true,
     'Marketing Tips': false,

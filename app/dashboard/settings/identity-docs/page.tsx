@@ -14,7 +14,7 @@ export default function IdentityDocsPage() {
       const newDoc = {
         id: Date.now(),
         name: e.target.files[0].name,
-        type: 'General ID', // Defaulting to general for now
+        type: 'General ID', 
         status: 'pending',
         date: new Date().toISOString().split('T')[0],
       };
@@ -35,7 +35,6 @@ export default function IdentityDocsPage() {
         </div>
       </div>
 
-      {/* Upload Section */}
       <div className="border border-dashed border-white/10 bg-[#0a0a0a] rounded-2xl p-8 mb-8 text-center hover:border-yellow-500/50 transition-colors">
         <input type="file" id="fileUpload" className="hidden" onChange={handleFileUpload} />
         <label htmlFor="fileUpload" className="cursor-pointer flex flex-col items-center">
@@ -45,7 +44,6 @@ export default function IdentityDocsPage() {
         </label>
       </div>
 
-      {/* Documents Table */}
       <div className="bg-[#0a0a0a] border border-white/10 rounded-2xl overflow-hidden">
         <table className="w-full text-left">
           <thead>

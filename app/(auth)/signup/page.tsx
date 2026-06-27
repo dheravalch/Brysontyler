@@ -8,7 +8,7 @@ import * as z from "zod";
 import Link from "next/link";
 import Input from "@/app/components/ui/Input";
 import Button from "@/app/components/ui/Button";
-import { CreatorApplicationWizard } from "@/app/components/CreatorApplicationForm";
+import { CreatorApplicationWizard } from "@/app/components/CreatorVerification";
 import { useSignUp } from "@/app/hooks/useAuth";
 import { SignUpPayload } from "@/app/models/AuthModel";
 
@@ -46,36 +46,31 @@ export default function SignupPage() {
       <h2 className="text-2xl font-black text-center uppercase tracking-tighter">
         {role === "creator" ? "Apply as Creator" : "Join the Experience"}
       </h2>
+      <form onSubmit={handleSubmit(onFanSubmit)} className="space-y-4">
+        <input type="hidden" {...register("role")} />
 
-      {role === "fan" ? (
-        <form onSubmit={handleSubmit(onFanSubmit)} className="space-y-4">
-          <input type="hidden" {...register("role")} />
-
-          <Input
-            {...register("name")}
-            type="text"
-            placeholder="Full Name"
-            error={errors.name?.message as string}
-          />
-          <Input
-            {...register("email")}
-            type="email"
-            placeholder="Email Address"
-            error={errors.email?.message as string}
-          />
-          <Input
-            {...register("password")}
-            type="password"
-            placeholder="Password"
-            error={errors.password?.message as string}
-          />
-          <Button isLoading={isPending || isSubmitting} type="submit">
-            {isSubmitting ? "CREATING..." : "CREATE ACCOUNT"}
-          </Button>
-        </form>
-      ) : (
-        <CreatorApplicationWizard/>
-      )}
+        <Input
+          {...register("name")}
+          type="text"
+          placeholder="Full Name"
+          error={errors.name?.message as string}
+        />
+        <Input
+          {...register("email")}
+          type="email"
+          placeholder="Email Address"
+          error={errors.email?.message as string}
+        />
+        <Input
+          {...register("password")}
+          type="password"
+          placeholder="Password"
+          error={errors.password?.message as string}
+        />
+        <Button isLoading={isPending || isSubmitting} type="submit">
+          {isSubmitting ? "CREATING..." : "CREATE ACCOUNT"}
+        </Button>
+      </form>
 
       <p className="text-center text-sm text-zinc-400">
         Already have an account?{" "}

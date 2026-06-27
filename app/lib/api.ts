@@ -12,7 +12,7 @@ async function request<T>(
   url: string,
   method: HttpMethod,
   payload?: unknown,
-  config: FetchConfig = {}
+  config: FetchConfig = {},
 ): Promise<T> {
   const controller = new AbortController();
   const timeout = config.timeout ?? 15000;
@@ -34,7 +34,6 @@ async function request<T>(
 
     const data = await res.json();
 
-    // 🔐 AUTH EXPIRED → LOG OUT
     if (res.status === 401 && !isLoggingOut) {
       isLoggingOut = true;
 
@@ -44,7 +43,7 @@ async function request<T>(
           credentials: "include",
         });
       } catch {
-        // ignore logout failure
+  
       }
 
       window.location.href = "/sign-in";
@@ -56,15 +55,15 @@ async function request<T>(
     }
 
     return data as T;
-} catch (error: any) {
-  if (error?.name === "AbortError") {
-    throw { message: "Request timeout" };
-  }
+  } catch (error: any) {
+    if (error?.name === "AbortError") {
+      throw { message: "Request timeout" };
+    }
 
-  const errorMessage = error?.message || error?.error || "Network error";
-  
-  throw { message: errorMessage };
-} finally {
+    const errorMessage = error?.message || error?.error || "Network error";
+
+    throw { message: errorMessage };
+  } finally {
     clearTimeout(id);
   }
 }

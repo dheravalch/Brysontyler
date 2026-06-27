@@ -21,12 +21,10 @@ export default function MessagesPage() {
   const [attachment, setAttachment] = useState<any>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  // 1. Sort conversations by timestamp (newest first)
+ 
   const sortedConversations = useMemo(() => {
     return [...conversations].sort((a, b) => b.timestamp - a.timestamp);
   }, [conversations]);
-
-  // 2. Filter sorted conversations
   const filteredConversations = sortedConversations.filter(c => 
     c.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
     c.lastMsg.toLowerCase().includes(searchQuery.toLowerCase())
@@ -35,11 +33,9 @@ export default function MessagesPage() {
   const sendMessage = () => {
     if (!inputText.trim() && !attachment) return;
 
-    // Update messages
     const newMessage = { text: inputText, sender: "me", attachment: attachment };
     setMessages({ ...messages, [activeChat.id]: [...(messages[activeChat.id] || []), newMessage] });
 
-    // Update conversation order and last message
     setConversations(prev => prev.map(c => 
       c.id === activeChat.id 
         ? { ...c, lastMsg: inputText || "Sent an attachment", time: "Just now", timestamp: Date.now() }
@@ -50,7 +46,6 @@ export default function MessagesPage() {
     setAttachment(null);
   };
 
-  // ... rest of your handleFileChange and JSX logic
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       const file = e.target.files[0];
@@ -63,7 +58,6 @@ export default function MessagesPage() {
 
   return (
     <div className="h-[80vh] flex bg-zinc-900 border border-white/5 rounded-3xl overflow-hidden">
-      {/* Sidebar */}
       <div className="w-1/3 border-r border-white/5 flex flex-col">
         <div className="p-6 border-b border-white/5">
           <div className="relative">
@@ -89,7 +83,6 @@ export default function MessagesPage() {
         </div>
       </div>
 
-      {/* Main Chat Area */}
       <div className="w-2/3 flex flex-col relative">
         <div className="p-6 border-b border-white/5 flex justify-between items-center">
           <h2 className="font-black text-lg">{activeChat.name}</h2>
@@ -108,7 +101,6 @@ export default function MessagesPage() {
           ))}
         </div>
 
-        {/* Input Area */}
         <div className="p-6 border-t border-white/5 bg-zinc-900">
           {attachment && (
             <div className="mb-4 relative inline-block w-20 h-20 rounded-xl overflow-hidden border border-white/10">

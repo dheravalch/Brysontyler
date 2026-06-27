@@ -35,7 +35,6 @@ export default function WalletPage() {
 
   return (
     <div className="space-y-8">
-      {/* Hero Balance Section */}
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-zinc-800 pb-8">
         <div>
           <h2 className="text-sm font-bold text-zinc-500 uppercase tracking-widest mb-2">Available Balance</h2>
@@ -48,7 +47,6 @@ export default function WalletPage() {
             </span>
           </div>
           
-          {/* Low Balance Warning */}
           {isLowBalance && (
             <div className="mt-3 flex items-center gap-2 text-red-500 text-xs font-bold animate-pulse">
               <AlertCircle size={14} />
@@ -71,8 +69,6 @@ export default function WalletPage() {
           <Plus size={18} /> Buy Coins
         </button>
       </div>
-
-      {/* Recent Activity */}
       <div>
         <h3 className="text-xs font-bold text-zinc-500 uppercase tracking-widest mb-4">Transaction History</h3>
         <div className="space-y-2">

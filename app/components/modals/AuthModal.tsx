@@ -29,7 +29,6 @@ export default function AuthModal({ onClose, type }: { onClose: () => void, type
         </h2>
         
         <div className="grid grid-cols-2 gap-4">
-          {/* Fan Button */}
           <button onClick={()=>handleRoleSelect('fan')} className="group flex flex-col items-center gap-3 p-6 bg-zinc-950 border border-white/5 rounded-2xl hover:border-zinc-500 transition-all hover:shadow-[0_0_20px_rgba(255,255,255,0.05)]">
             <div className="p-3 rounded-full bg-zinc-900 group-hover:bg-zinc-800 transition-colors">
               <User size={28} className="text-zinc-400 group-hover:text-white transition-colors" />

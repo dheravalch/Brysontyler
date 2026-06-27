@@ -14,7 +14,7 @@ export async function POST(req: Request) {
 
   const data = await response.json();
 
-  // Return the raw response from your backend with the correct status
+
   return NextResponse.json(data, {
     status: response.status,
   });

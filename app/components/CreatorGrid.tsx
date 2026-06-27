@@ -18,7 +18,6 @@ export default function CreatorGrid() {
 
   return (
     <section className="max-w-7xl mx-auto px-6 py-16">
-      {/* Header and Controls */}
       <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
         <div className="space-y-1">
           <div className="text-yellow-400 text-[10px] font-black uppercase tracking-[0.25em]">
@@ -53,8 +52,6 @@ export default function CreatorGrid() {
           </button>
         </div>
       </div>
-
-      {/* Grid Layout - Scaled for consistency */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {filteredCreators.map((creator) => (
           <div key={creator.id} className="group transition-transform duration-300 hover:-translate-y-1">

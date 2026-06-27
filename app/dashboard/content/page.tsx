@@ -4,7 +4,6 @@
 import { useState, useRef } from "react";
 import { Video, Trash2, Edit3, Eye, X, Save, CloudUpload, Image as ImageIcon } from "lucide-react";
 
-// Modal component defined outside to avoid render errors
 const Modal = ({ children, onClose }: { children: React.ReactNode; onClose: () => void }) => (
   <div 
     className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-6 backdrop-blur-sm" 
@@ -66,7 +65,6 @@ export default function ContentPage() {
         </button>
       </header>
 
-      {/* Upload Zone */}
       <div className="bg-zinc-900 border border-white/5 p-8 rounded-3xl mb-12">
         <div className="font-black mb-6 flex items-center gap-2 text-sm uppercase tracking-widest text-zinc-500">
           <CloudUpload size={20} className="text-yellow-500" /> BTP Uploader
@@ -88,8 +86,6 @@ export default function ContentPage() {
           ))}
         </div>
       </div>
-
-      {/* Table */}
       <div className="bg-zinc-900 border border-white/5 rounded-3xl overflow-hidden">
         <table className="w-full text-left">
           <tbody className="divide-y divide-white/5">
@@ -109,8 +105,6 @@ export default function ContentPage() {
           </tbody>
         </table>
       </div>
-
-      {/* Edit Modal */}
       {editingItem && (
         <Modal onClose={() => setEditingItem(null)}>
           <h2 className="text-xl font-black mb-6">Edit Production</h2>
@@ -119,7 +113,6 @@ export default function ContentPage() {
         </Modal>
       )}
 
-      {/* Preview Modal */}
       {viewingItem && (
         <Modal onClose={() => setViewingItem(null)}>
           <div className="aspect-video bg-black rounded-xl overflow-hidden flex items-center justify-center">
