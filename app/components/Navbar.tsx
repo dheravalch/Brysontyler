@@ -106,7 +106,7 @@ function renderActions(isMobile: boolean) {
       {user ? (
         <div className={`flex ${isMobile ? "flex-col items-center gap-6 mt-6" : "items-center gap-4"}`}>
           <div 
-            onClick={() => handleAction(() => push("/profile"))} 
+            onClick={() => handleAction(() => push("/dashboard"))} 
             className="flex cursor-pointer items-center gap-3 bg-white/5 px-4 py-2 rounded-full border border-white/10"
           >
             <div className="w-8 h-8 rounded-full overflow-hidden bg-yellow-500 flex items-center justify-center text-black font-bold text-xs">

@@ -7,6 +7,7 @@ const authRoutes = [
   "/signup",
   "/verify-email",
   "/forgot-password",
+  "/home"
 ];
 
 const protectedRoutes = ["/admin", "/dashboard"];
