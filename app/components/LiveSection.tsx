@@ -1,86 +1,155 @@
 "use client";
 
-import { Play, Eye } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Play, Eye, Flame, Lock, User, Sparkles } from "lucide-react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { useState } from "react";
+import CreatorProtocols from "./FAQS";
 
 export default function LiveSection() {
   const { push } = useRouter();
+  const [hoveredId, setHoveredId] = useState<number | null>(null);
+
+  const isUserLoggedIn = false;
 
   const liveCreators = [
     {
       id: 1,
-      name: "Bryson Tyler",
-      image: "https://picsum.photos/id/1015/800/600",
+      name: "Lee Princess",
+      image:
+        "https://images.unsplash.com/photo-1611145434336-2324aa4079cd?q=80&w=765&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       viewers: "2.4k",
+      tags: ["Exclusive", "VIP"],
     },
     {
       id: 2,
       name: "Alex River",
-      image: "https://picsum.photos/id/1025/800/600",
+      image:
+        "https://images.unsplash.com/photo-1653209708749-706432f458a7?q=80&w=1281&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       viewers: "1.8k",
+      tags: ["Premium", "Hot"],
     },
     {
       id: 3,
       name: "Jordan Kai",
-      image: "https://picsum.photos/id/1027/800/600",
+      image:
+        "https://images.unsplash.com/photo-1587434554575-c831b3d99b33?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       viewers: "3.1k",
+      tags: ["Top Rated", "Live"],
     },
   ];
 
+  const handleAction = (creatorId: number) => {
+    if (!isUserLoggedIn) {
+      push("/login");
+    } else {
+      push(`/live/${creatorId}`);
+    }
+  };
+
   return (
-    <section className="py-10 bg-[#18181b] text-white">
+    <section className="py-20 bg-[#09090b] text-white">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-end mb-8 gap-4">
-          <h2 className="text-3xl md:text-4xl font-black tracking-tighter uppercase flex items-center gap-3">
-            <span className="relative flex h-3 w-3">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-600 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-3 w-3 bg-red-600"></span>
-            </span>
-            Live Now
-          </h2>
-          <button
-            onClick={() => push("/all-streams")}
-            className="text-[10px] font-black tracking-[0.25em] text-zinc-500 hover:text-red-500 uppercase transition-colors self-start sm:self-auto"
-          >
-            View All Streams
-          </button>
-        </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+       <div className="flex flex-col mb-12 space-y-6">
+  <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+    <h2 className="text-5xl md:text-5xl font-black tracking-tighter leading-none">
+      <span className="text-white">Live</span>{" "}
+      <span className="bg-gradient-to-r from-[#F7E018] to-[#FFD700] bg-clip-text text-transparent drop-shadow-[0_0_15px_rgba(247,224,24,0.3)]">
+        Now
+      </span>
+    </h2>
+
+    <button
+      onClick={() => push("/all-streams")}
+      className="text-[10px] font-black tracking-[0.25em]  text-[#F7E018] uppercase transition-colors flex items-center gap-2 group"
+    >
+      View All Streams
+      <span className=" p-1 rounded-full w-5 h-5 flex items-center justify-center bg-[#F7E018] text-black transition-colors">
+        →
+      </span>
+    </button>
+  </div>
+  <div className="flex items-center gap-3">
+    <div className="h-px w-12 bg-[#F7E018]" />
+    <p className="text-gray-300 max-w-lg text-sm md:text-base leading-relaxed">
+      Step into the inner circle. Join exclusive, high-definition live sessions,
+      engage in private chats, and gain{" "}
+      <span className="text-[#F7E018] mr-1 font-bold">VIP access</span> to content you
+      won&lsquo;t find anywhere else.
+    </p>
+  </div>
+</div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {liveCreators.map((creator) => (
-            <div
+            <motion.div
               key={creator.id}
-              onClick={() => push(`/live/${creator.id}`)}
-              className="group aspect-[16/10] sm:aspect-[4/3] bg-zinc-900 cursor-pointer overflow-hidden relative border border-white/[0.05] transition-all duration-500 hover:border-red-600/50"
+              className="relative aspect-[3/4] rounded-3xl overflow-hidden cursor-pointer group"
+              onMouseEnter={() => setHoveredId(creator.id)}
+              onMouseLeave={() => setHoveredId(null)}
+              onClick={() => handleAction(creator.id)}
             >
               <Image
                 src={creator.image}
                 alt={creator.name}
                 fill
-                className="object-cover transition-transform duration-700 group-hover:scale-105"
+                className="object-cover transition-transform duration-700 group-hover:scale-110"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent z-10 p-6 flex flex-col justify-end">
-                <div className="flex items-center gap-2 mb-2">
-                  <span className="px-2 py-0.5 bg-red-600 text-[9px] font-black uppercase tracking-widest">
-                    Live
-                  </span>
-                  <span className="flex items-center gap-1 text-[10px] text-zinc-300 font-bold">
-                    <Eye size={10} /> {creator.viewers}
-                  </span>
-                </div>
-                <h3 className="text-lg font-bold tracking-tight">
-                  {creator.name}
-                </h3>
+              <div className="absolute inset-0 bg-gradient-to-t from-[#09090b] via-black/20 to-transparent" />
+
+              <div className="absolute top-4 left-4 z-20 flex gap-2">
+                <span className="bg-red-600 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest flex items-center gap-1.5">
+                  <span className="w-2 h-2 bg-white rounded-full animate-pulse" />{" "}
+                  Live
+                </span>
               </div>
-              <div className="absolute inset-0 flex items-center justify-center z-20 bg-black/10 sm:opacity-0 sm:group-hover:opacity-100 transition-all duration-300">
-                <div className="w-14 h-14 sm:w-16 sm:h-16 border-2 border-white rounded-full flex items-center justify-center bg-white/10 backdrop-blur-sm sm:hover:bg-white sm:hover:text-black transition-all">
-                  <Play fill="currentColor" size={20} className="ml-1" />
+
+              {/* Reveal Details on Hover */}
+              <AnimatePresence>
+                {hoveredId === creator.id && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 20 }}
+                    className="absolute inset-0 z-30 p-8 flex flex-col justify-end bg-black/60 backdrop-blur-sm"
+                  >
+                    <h3 className="text-2xl font-black uppercase mb-2">
+                      {creator.name}
+                    </h3>
+                    <div className="flex gap-2 mb-6">
+                      {creator.tags.map((tag) => (
+                        <span
+                          key={tag}
+                          className="text-[10px] uppercase border border-white/20 px-2 py-1 rounded-md"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+
+                    <button className="w-full py-3 bg-white text-black font-black text-sm uppercase rounded-4xl flex items-center justify-center gap-2 hover:bg-yellow-400 hover:text-black transition-colors">
+                      {isUserLoggedIn ? <Play size={16} /> : <Lock size={16} />}
+                      {isUserLoggedIn ? "Watch Stream" : "Subscribe to Unlock"}
+                    </button>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
+              {hoveredId !== creator.id && (
+                <div className="absolute bottom-8 left-8 z-20 ">
+                  <h3 className="text-lg font-black">{creator.name}</h3>
+                  <p className="flex items-center gap-1 text-xs text-zinc-400 font-bold mt-1">
+                    <Eye className="text-yellow-400" size={12} />{" "}
+                    {creator.viewers} Watching
+                  </p>
                 </div>
-              </div>
-            </div>
+              )}
+            </motion.div>
           ))}
         </div>
       </div>
+      <CreatorProtocols/>
     </section>
   );
 }

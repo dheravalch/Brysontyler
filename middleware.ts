@@ -23,7 +23,7 @@ export function middleware(request: NextRequest) {
   );
 
   if (token && isAuthRoute) {
-    return NextResponse.redirect(new URL("/home", request.url));
+    return NextResponse.redirect(new URL("/dashboard", request.url));
   }
 
   if (!token && isProtectedRoute) {

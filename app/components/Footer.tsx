@@ -1,83 +1,57 @@
-export default function Footer() {
+import { User } from "../models/AuthModel";
+
+interface FooterProps {
+  openSignUp?: () => void;
+  user?: User;
+}
+
+export default function Footer({ openSignUp, user }: FooterProps) {
   const footerLinks = [
-    {
-      title: "Platform",
-      links: ["About Us", "Press", "Blog", "Careers"],
-    },
-    {
-      title: "Support",
-      links: ["Help Center", "Safety Center", "Contact", "Report"],
-    },
-    { title: "Legal", links: ["Terms", "Privacy", "Removal", "2257"] },
-    {
-      title: "Connect",
-      links: ["Twitter", "Instagram", "Discord", "Support"],
-    },
+    { title: "Best Models", title2: "Hire Contractors" },
+    { title: "Hot Offers", title2: "Run Payroll" },
+    { title: "Trending Content", title2: "Expand Globally" },
+    { title: "Exclusive Online", title2: "Offer Benefits" },
+    { title: "Live Now", title2: "Stock Options" },
+    { title: "Private Community", title2: "Employment Blog" },
+    { title: "Discount 50%", title2: "" },
   ];
+
   return (
-    <footer className="bg-[#050505] border-t border-white/5 pt-16 pb-8 relative overflow-hidden">
-      <div className="bg-gradient-to-b from-zinc-900 to-black py-16 border-y border-yellow-500/10 mb-16">
-        <div className="container mx-auto px-6 max-w-4xl text-center">
-          <h3 className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-yellow-500 to-yellow-600 text-2xl md:text-3xl font-black mb-6 uppercase tracking-tight">
-            The Premier Adult Entertainment Hub
-          </h3>
-          <p className="text-zinc-400 text-sm md:text-base leading-relaxed max-w-2xl mx-auto">
-            Bryson Tyler Productions provides you with unlimited free porn
-            videos featuring the hottest pornstars. Enjoy the largest amateur
-            porn community on the net, as well as full-length scenes from the
-            top XXX studios. We update our content daily to ensure you always
-            get the best quality sex movies available anywhere.
-          </p>
+    <footer className="bg-[#09090b] border-t border-white/5 py-12 text-white">
+      <div className="container mx-auto px-6 max-w-7xl">
+        <div className="flex flex-col md:flex-row justify-between items-start gap-12">
+          <div className="flex flex-col gap-4 max-w-sm">
+            <h2 className="text-xl font-medium tracking-tight leading-snug">
+              Indulge in Exclusive Content
+              <br />
+              <span className="text-gray-300">
+                and Private Unlimited Access.
+              </span>
+            </h2>
 
-          <div className="mt-8 flex justify-center gap-2">
-            <div className="h-1 w-12 bg-yellow-600 rounded-full" />
-            <div className="h-1 w-4 bg-yellow-800 rounded-full" />
+            <button
+              onClick={() => {
+                openSignUp?.();
+              }}
+              className="bg-yellow-400 rounded-4xl hover:bg-yellow-300 text-black font-semibold text-md w-fit  px-7 py-2  shadow-[0_0_40px_rgba(250,204,21,0.2)] hover:shadow-[0_0_60px_rgba(250,204,21,0.4)] transition-all active:scale-[0.97]"
+            >
+              Join Now
+            </button>
           </div>
-        </div>
-      </div>
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,_var(--tw-gradient-stops))] from-yellow-900/10 via-transparent to-transparent opacity-40" />
-
-      <div className="container mx-auto px-6 max-w-6xl relative z-10">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-12 mb-16">
-          {footerLinks.map((section) => (
-            <div key={section.title}>
-              <h4 className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-yellow-600 font-black text-xs mb-6 tracking-[0.2em] uppercase">
-                {section.title}
-              </h4>
-              <ul className="space-y-4">
-                {section.links.map((link) => (
-                  <li key={link}>
-                    <a
-                      href="#"
-                      className="text-zinc-500 hover:text-yellow-400 transition-all duration-300 text-sm font-medium hover:pl-2 hover:text-yellow-100"
-                    >
-                      {link}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-        <div className="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-6">
-          <div className="flex gap-3">
-            <div className="h-2 w-2 rounded-full bg-yellow-500 animate-pulse shadow-[0_0_8px_rgba(234,179,8,0.6)]" />
-            <div className="h-2 w-2 rounded-full bg-yellow-600 animate-pulse" />
+          <div className="grid grid-cols-2 gap-x-12 gap-y-3 text-[13px] text-zinc-400">
+            {footerLinks.map((item, idx) => (
+              <div key={idx} className="contents">
+                <a href="#" className="hover:text-[#F7E018] transition-colors">
+                  {item.title}
+                </a>
+                <a href="#" className="hover:text-[#F7E018] transition-colors">
+                  {item.title2}
+                </a>
+              </div>
+            ))}
           </div>
-
-          <p className="text-[10px] text-zinc-500 font-bold tracking-widest uppercase">
-            © 2026{" "}
-            <span className="text-yellow-500">Bryson Tyler Productions</span> •
-            18+ Only • All Payments USD
-          </p>
-
-          <div className="flex gap-6">
-            <span className="text-yellow-600 hover:text-yellow-400 cursor-pointer transition-colors text-[10px] font-black tracking-widest uppercase border-b border-yellow-600/30">
-              Terms
-            </span>
-            <span className="text-yellow-600 hover:text-yellow-400 cursor-pointer transition-colors text-[10px] font-black tracking-widest uppercase border-b border-yellow-600/30">
-              Privacy
-            </span>
+          <div className="self-start text-lg font-black tracking-tighter uppercase">
+            Bryson<span className="text-[#F7E018]">Tyler</span>
           </div>
         </div>
       </div>

@@ -31,7 +31,7 @@ export default function ForgotPasswordPage() {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
       <div className="space-y-2">
-        <h2 className="text-2xl font-black uppercase tracking-tighter">Forgot Password</h2>
+        <h2 className="text-2xl font-black tracking-tighter">Forgot Password</h2>
         <p className="text-sm text-zinc-400">
           Enter your email to receive a secure reset link.
         </p>
@@ -45,7 +45,7 @@ export default function ForgotPasswordPage() {
       />
       
       <Button isLoading={isPending} disabled={isPending} type="submit">
-        {isPending ? "SENDING..." : "SEND RESET LINK"}
+        Send reset link
       </Button>
 
       <div className="text-center">

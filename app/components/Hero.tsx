@@ -3,23 +3,33 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import SubscribeModal from "./modals/SubscribeModal";
-
+import { useRouter } from "next/navigation";
+import CreatorStats from "./CreatorStats";
+interface HeroProps{
+  openModal:()=>void;
+}
 const MEDIA_ASSETS = [
   {
     type: "image",
-    src: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=1920&q=80",
+    src: "https://images.unsplash.com/photo-1592399786447-6ad3da3e751e?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
-  { type: "video", src: "https://www.w3schools.com/html/mov_bbb.mp4" },
   {
     type: "image",
-    src: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=1920&q=80",
+    src: "https://images.unsplash.com/photo-1590397041404-a0cfb285a2a6?q=80&w=765&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  },
+  {
+    type: "image",
+    src: "https://images.unsplash.com/photo-1445088803572-b7b975c96e12?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  },
+  {
+    type: "image",
+    src: " https://images.unsplash.com/photo-1604238400876-0f653479e649?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
 ];
 
-export default function Hero() {
+export default function Hero({openModal}:HeroProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
-
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % MEDIA_ASSETS.length);
@@ -28,7 +38,8 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="relative lg:min-h-screen lg:mt-18 mt-20 flex items-center justify-center text-center overflow-hidden">
+    <section className="relative lg:min-h-screen pb-38 pt-24 overflow-hidden">
+       
       <div className="absolute inset-0 z-0">
         <AnimatePresence mode="wait">
           <motion.div
@@ -63,41 +74,40 @@ export default function Hero() {
         <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-black/90" />
       </div>
 
-      <div className="relative max-w-4xl mx-auto px-6 z-10 flex flex-col items-center">
+      <div className="relative  z-10 pt-28 px-8">
+        <h2 className="text-3xl sm:text-3xl md:text-[2rem] font-black tracking-tight leading-[0.9] mb-4 text-white drop-shadow-lg">
+          Unlock Private Content and
+          <br />
+          <span className="text-transparent bg-clip-text bg-gradient-to-b from-yellow-300 to-yellow-600 drop-shadow-[0_0_15px_rgba(250,204,21,0.3)]">
+            Join an Excluisve Community
+          </span>
+        </h2>
+
+        <p className=" text-md mb-4 w-[450px] text-gray-200 leading-relaxed">
+         Bryson is a platform built for creators and fans. Join a global community where millions of creators connect with their audience, monetize their content securely, and express their vision entirely on their own terms
+        </p>
         <motion.div
           initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          className="inline-flex items-center gap-2 bg-white/5 backdrop-blur-md border border-white/10 px-4 py-1.5 rounded-full mb-10 shadow-2xl"
+          className="flex items-center gap-2 w-fit bg-white/5 backdrop-blur-md border border-white/10 px-4 py-1.5 rounded-full mb-4 shadow-2xl"
         >
           <div className="w-2 h-2 bg-yellow-400 rounded-full animate-pulse" />
           <span className="text-[10px] font-black uppercase tracking-[0.2em] text-white/80">
             18+ Exclusive Membership
           </span>
         </motion.div>
-
-        <h2 className="text-5xl sm:text-7xl md:text-[5rem] font-black tracking-tighter leading-[0.9] mb-8 text-white drop-shadow-lg">
-          YOUR ULTIMATE
-          <br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-b from-yellow-300 to-yellow-600 drop-shadow-[0_0_15px_rgba(250,204,21,0.3)]">
-            BOYFRIEND EXPERIENCE
-          </span>
-        </h2>
-
-        <p className="max-w-lg mx-auto text-lg text-zinc-300 mb-10 leading-relaxed font-medium">
-          Unlock your private daily content, direct sessions, and a truly
-          personalized connection.
-        </p>
-
-        <button
-          onClick={() => setIsModalOpen(true)}
-          className="bg-yellow-400 hover:bg-yellow-300 text-black font-black text-lg px-12 py-5 rounded-2xl shadow-[0_0_40px_rgba(250,204,21,0.2)] hover:shadow-[0_0_60px_rgba(250,204,21,0.4)] transition-all active:scale-[0.97]"
+       <div className="flex items-center">
+         <button
+          onClick={openModal}
+          className="bg-yellow-400 rounded-4xl hover:bg-yellow-300 text-black font-semibold text-md px-7 py-2  shadow-[0_0_40px_rgba(250,204,21,0.2)] hover:shadow-[0_0_60px_rgba(250,204,21,0.4)] transition-all active:scale-[0.97]"
         >
-          START YOUR EXPERIENCE — $14.99/MO
+          Join Now
         </button>
-
-        <p className="mt-8 text-[10px] uppercase tracking-[0.2em] text-zinc-500 font-bold">
+        <CreatorStats/>
+       </div>
+        {/* <p className="mt-8 text-[10px] uppercase tracking-[0.2em] text-zinc-500 font-bold">
           7-day free trial • Secure & Private
-        </p>
+        </p> */}
       </div>
 
       {isModalOpen && (

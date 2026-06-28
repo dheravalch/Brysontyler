@@ -33,7 +33,7 @@ export default function LoginPage() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-      <h2 className="text-2xl font-black text-center uppercase tracking-tighter">
+      <h2 className="text-2xl font-black text-center tracking-tighter">
         Welcome Back
       </h2>
 
@@ -52,7 +52,7 @@ export default function LoginPage() {
       />
 
       <Button isLoading={isPending} type="submit">
-        {isPending ? "SIGNING IN..." : "LOGIN"}
+      Login
       </Button>
 
       <div className="flex justify-center text-sm mt-4 text-zinc-400">

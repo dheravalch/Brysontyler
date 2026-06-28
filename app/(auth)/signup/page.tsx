@@ -43,7 +43,7 @@ export default function SignupPage() {
 
   return (
     <div className="space-y-6">
-      <h2 className="text-2xl font-black text-center uppercase tracking-tighter">
+      <h2 className="text-2xl font-black text-center tracking-tighter">
         {role === "creator" ? "Apply as Creator" : "Join the Experience"}
       </h2>
       <form onSubmit={handleSubmit(onFanSubmit)} className="space-y-4">
@@ -68,7 +68,7 @@ export default function SignupPage() {
           error={errors.password?.message as string}
         />
         <Button isLoading={isPending || isSubmitting} type="submit">
-          {isSubmitting ? "CREATING..." : "CREATE ACCOUNT"}
+          Create Account
         </Button>
       </form>
 

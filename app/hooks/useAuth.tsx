@@ -29,7 +29,7 @@ export const useSignIn = () => {
     onSuccess: (res) => {
       setUser(res.data?.user as User);
       toast.success(res.message || "Login Successful");
-      replace("/home");
+      replace("/dashboard");
     },
     onError: (err) => toast.error(getErrorMessage(err)),
   });
@@ -95,5 +95,70 @@ export const useGetAuthUser = (isAuthenticated:boolean) => {
      enabled:isAuthenticated,
     staleTime: 1000 * 60 * 5,
     retry: false,
+  });
+};
+export const useCompleteProfile = (onNext:()=>void) => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: authService.completeProfile,
+    onSuccess: (res) => {
+      toast.success(res.message || "Profile completed successfully");
+      queryClient.invalidateQueries({ queryKey: ["authUser"] });
+      onNext?.()
+    },
+    onError: (err) => toast.error(getErrorMessage(err)),
+  });
+};
+export const useCreatorVerification = (onNext:()=>void) => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: authService.creatorVerification,
+    onSuccess: (res) => {
+      toast.success(res.message || "Creator Verification completed successfully");
+      queryClient.invalidateQueries({ queryKey: ["authUser"] });
+      onNext?.()
+    },
+    onError: (err) => toast.error(getErrorMessage(err)),
+  });
+};
+export const useUploadProfileImage = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: authService.uploadProfileImage,
+    onSuccess: (res) => {
+      toast.success(res.message || "Profile image updated");
+      queryClient.invalidateQueries({ queryKey: ["authUser"] });
+    },
+    onError: (err) => toast.error(getErrorMessage(err)),
+  });
+};
+export const useUploadCoverImage = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: authService.uploadCoverImage,
+    onSuccess: (res) => {
+      toast.success(res.message || "Cover image updated");
+      queryClient.invalidateQueries({ queryKey: ["authUser"] });
+    },
+    onError: (err) => toast.error(getErrorMessage(err)),
+  });
+};
+export const useStartKYC = () => {
+  return useMutation({
+    mutationFn: authService.startKYC,
+    onSuccess: (res) => {
+      if (res.verificationUrl) {
+   
+        
+        window.location.href = res.verificationUrl;
+      }
+    },
+    onError: (err: any) => {
+      toast.error(err?.message || "Failed to initiate identity verification");
+    },
   });
 };

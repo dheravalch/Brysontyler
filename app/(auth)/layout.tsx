@@ -1,42 +1,48 @@
 "use client";
 
 import { useRouter } from 'next/navigation';
-import { ArrowLeft, Home } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
+import Logo from '../components/ui/Logo';
 
 export default function AuthLayout({ children }: { children: React.ReactNode }) {
   const router = useRouter();
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-6 bg-cover bg-center bg-no-repeat">
-      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
+    <div className="min-h-screen flex flex-col md:flex-row bg-[#050505]">
+      
+      <div className="hidden md:flex flex-col justify-center p-16 w-1/2 relative bg-cover bg-center">
 
-      <div className="relative w-full max-w-md bg-zinc-900/80 border border-white/10 rounded-3xl p-8 shadow-2xl backdrop-blur-md">
+        <div 
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: "url('https://images.unsplash.com/photo-1632026644887-c3d790f10aea?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')" }}
+        />
         
-        {/* Navigation Row */}
-        <div className="absolute top-6 left-6 right-6 flex justify-between items-center">
-          <button 
-            onClick={() => router.back()}
-            className="p-2 text-zinc-500 hover:text-white hover:bg-white/5 rounded-xl transition-all"
-          >
-            <ArrowLeft size={20} />
-          </button>
+<div className="absolute inset-0 bg-gradient-to-br from-[#F7E018]/20 via-[#050505]/60 to-[#050505] mix-blend-multiply" />
+        
+        <div className="relative z-10 max-w-md">
+         <Logo size={16}/>
+          <p className="text-white/90 text-lg  leading-relaxed drop-shadow-sm">
+            Gain exclusive, high-definition access to private content and direct communication with creators. Your inner circle awaits.
+          </p>
+        </div>
+      </div>
+      <div className="flex-1 flex flex-col justify-center p-6 md:p-16 relative">
+        
+        <button 
+          onClick={() => router.back()}
+          className="absolute top-8 left-8 text-zinc-500 hover:text-white flex items-center gap-2 text-sm font-bold uppercase tracking-widest transition-colors"
+        >
+          <ArrowLeft size={16} /> Back
+        </button>
+
+        <div className="w-full max-w-lg mx-auto bg-zinc-900/60 p-10 rounded-3xl border border-white/10">
+          <div className="md:hidden text-2xl font-black text-[#F7E018] mb-8">BRYSON TYLER</div>
           
-          <button 
-            onClick={() => router.push('/home')}
-            className="flex items-center gap-2 px-3 py-1.5 text-xs font-bold text-zinc-400 hover:text-white hover:bg-white/5 rounded-lg transition-all uppercase tracking-wider"
-          >
-            Home <Home size={14} />
-          </button>
+          {children}
         </div>
-
-        <div className="text-center mb-8 mt-12">
-          <div className="w-16 h-16 bg-gradient-to-br from-yellow-400 to-amber-500 rounded-2xl flex items-center justify-center text-black font-black text-2xl mx-auto mb-4 shadow-[0_0_30px_rgba(251,191,36,0.3)]">
-            BT
-          </div>
-          <h1 className="text-2xl font-black tracking-tighter">BRYSON TYLER</h1>
-        </div>
-        
-        {children}
+        <p className="text-[9px] text-center mt-5 text-zinc-600 uppercase tracking-widest font-bold">
+        © 2026 Bryson Tyler Productions • 18+ Only
+      </p>
       </div>
     </div>
   );

@@ -5,51 +5,45 @@ import CreatorCard from "./CreatorCard";
 import { Creator, creators } from "../lib/data";
 import CreatorProfileModal from "./modals/CreatorModal";
 import { useRouter } from "next/navigation";
+import { useAuthStore } from "../store/useAuthStore";
+import AuthModal from "./modals/AuthModal";
 
 export default function CreatorGrid() {
   const [search, setSearch] = useState<string>("");
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [creator, setCreator] = useState<Creator | null>(null);
   const { push } = useRouter();
-
+    const [modalType, setModalType] = useState<"login" | "signup" | null>(null);
+  const {user}=useAuthStore()
   const filteredCreators = creators.filter((c) =>
     c.name.toLowerCase().includes(search.toLowerCase())
   );
 
   return (
     <section className="max-w-7xl mx-auto px-6 py-16">
+      {modalType && (
+              <AuthModal type={modalType} onClose={() => setModalType(null)} />
+            )}
       <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
         <div className="space-y-1">
-          <div className="text-yellow-400 text-[10px] font-black uppercase tracking-[0.25em]">
-            Discover Your Favorite
-          </div>
+         
           <h2 className="text-4xl md:text-5xl font-black tracking-tighter text-white">
             Featured Creators
           </h2>
+           <div className="text-yellow-400 text-[10px] font-black uppercase tracking-[0.25em]">
+            Discover Your Favorite Creator
+          </div>
         </div>
 
         <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
-          <div className="relative group w-full md:w-72">
-            <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-              <svg className="w-4 h-4 text-zinc-500 group-focus-within:text-yellow-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-              </svg>
-            </div>
-            <input
-              type="text"
-              placeholder="Search creators..."
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              className="w-full bg-zinc-900/50 border border-white/10 rounded-2xl pl-11 pr-6 py-3.5 text-sm text-white placeholder-zinc-600 outline-none focus:border-yellow-500/50 transition-all"
-            />
-          </div>
+    
 
-          <button 
-            onClick={() => push('/creators')} 
-            className="px-6 py-3.5 bg-white/5 border border-white/10 hover:border-yellow-400/50 rounded-2xl text-[10px] font-black uppercase tracking-[0.2em] text-white transition-all whitespace-nowrap"
-          >
-            View All
-          </button>
+           <button
+          onClick={() => push("/creators")}
+          className="bg-yellow-400 rounded-4xl w-fit ml-auto flex justify-end hover:bg-yellow-300 text-black font-semibold text-sm px-7 py-2  shadow-[0_0_40px_rgba(250,204,21,0.2)] hover:shadow-[0_0_60px_rgba(250,204,21,0.4)] transition-all active:scale-[0.97]"
+        >
+          View All
+        </button>
         </div>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
@@ -58,8 +52,12 @@ export default function CreatorGrid() {
             <CreatorCard
               {...creator}
               onClick={() => {
-                setIsOpen(true);
-                setCreator(creator);
+                if(user){
+                   push(`/dashboard/profile/${user._id}`)
+                }
+                else{
+                 setModalType('signup')
+                }
               }}
             />
           </div>

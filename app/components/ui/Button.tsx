@@ -14,7 +14,7 @@ export default function Button({
   ...props
 }: ButtonProps) {
   const baseStyles = `
-    w-full py-5 rounded-2xl font-black text-lg transition-all 
+    w-full py-3 rounded-2xl font-black text-lg transition-all 
     active:scale-[0.97] flex items-center justify-center gap-2 
     disabled:opacity-50 disabled:cursor-not-allowed
   `;

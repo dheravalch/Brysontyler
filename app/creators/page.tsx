@@ -5,24 +5,33 @@ import CreatorCard from '../components/CreatorCard';
 import { creators } from '../lib/data';
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
+import AuthModal from '../components/modals/AuthModal';
+import { useAuthStore } from '../store/useAuthStore';
+import { useRouter } from 'next/navigation';
+import CreatorProtocols from '../components/FAQS';
 
 export default function AllCreatorsView() {
   const [search, setSearch] = useState('');
-
-
+    const [modalType, setModalType] = useState<"login" | "signup" | null>(null);
+    const {user}=useAuthStore()
+    const {push}=useRouter()
 
   return (
    <>
    <Navbar/>
     <section className="pt-32 pb-20 px-6 ">
+      {modalType && (
+                    <AuthModal type={modalType} onClose={() => setModalType(null)} />
+                  )}
       <div className="flex flex-col md:flex-row md:justify-between md:items-end mb-12 gap-8">
         <div className="space-y-1">
-          <div className="text-yellow-400 text-[10px] font-black uppercase tracking-[0.25em]">
-            Discover Your Favorite
-          </div>
+         
           <h2 className="text-4xl md:text-5xl font-black tracking-tighter text-white">
             All Creators
           </h2>
+           <div className="text-yellow-400 text-[10px] font-black uppercase tracking-[0.25em]">
+            Discover Your Favorite 
+          </div>
         </div>
         
         <div className="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
@@ -37,7 +46,7 @@ export default function AllCreatorsView() {
               placeholder="Search creators..." 
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full bg-zinc-900/50 border border-white/10 rounded-2xl pl-11 pr-6 py-4 text-sm text-white placeholder-zinc-600 outline-none transition-all duration-300 focus:bg-zinc-900 focus:border-yellow-500/50"
+              className="w-full bg-zinc-900/50 border border-white/10 rounded-2xl pl-11 pr-6 py-3 text-sm text-white placeholder-zinc-600 outline-none transition-all duration-300 focus:bg-zinc-900 focus:border-yellow-500/50"
             />
           </div>
         </div>
@@ -47,7 +56,14 @@ export default function AllCreatorsView() {
           <CreatorCard 
             key={index} 
             {...creator} 
-            onClick={() => console.log(`Navigating to ${creator.name}`)}
+             onClick={() => {
+                if(user){
+                   push(`/dashboard/profile/${user._id}`)
+                }
+                else{
+                 setModalType('signup')
+                }
+              }}
           />
         ))}
       </div>
@@ -57,8 +73,9 @@ export default function AllCreatorsView() {
           Load More Creators
         </button>
       </div>
-
+   
     </section>
+       <CreatorProtocols/>
     <Footer/>
    </>
   );

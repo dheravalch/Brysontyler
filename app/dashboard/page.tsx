@@ -1,75 +1,102 @@
 "use client";
 
-import { Activity, Link as LinkIcon, BarChart3, Clock } from "lucide-react";
+import Image from "next/image";
+import { Image as ImageIcon, Smile, Type, MoreHorizontal, VerifiedIcon } from "lucide-react";
+import { useAuthStore } from "../store/useAuthStore";
+import { PostActions } from "../components/ui/PostActions";
+import { SuggestedCreators } from "../components/ui/SuggestedCreators";
+import { useRouter } from "next/navigation";
 
-export default function CreatorDashboardPage() {
+const POSTS = Array.from({ length: 20 }).map((_, i) => ({
+  id: i,
+  user: ["Elena", "Seraphina", "Jade", "Valentina"][i % 4],
+  handle: ["@elena_vibe", "@sera.glow", "@jade.noir", "@val_lux"][i % 4],
+  content: [
+    "Just finished shooting an exclusive set in my favorite silk outfit. You guys are going to love the lighting in this one—full gallery is now live for subscribers! ✨",
+    "Nothing like a quiet evening at home with a glass of wine. It’s the perfect time to catch up on messages and share a little something extra with my top fans. Check your DMs. 🍷",
+    "Feeling bold today and decided to try something I've never done on camera before. This is definitely one of my most requested looks. Let me know what you think in the comments! 🔥",
+    "Live session starting in 30 minutes! I'm going to be answering all your questions and doing some fun requests. Don't miss out, it's going to be a long one tonight. 🎥"
+  ][i % 4],
+  time: `${(i + 1) * 2}m ago`,
+  image: [
+    "https://images.unsplash.com/photo-1585323524366-b82f90606731?q=80&w=1170&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1592399786447-6ad3da3e751e?q=80&w=1170&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1630567136459-7a8fa832c80e?w=600&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1545816721-3be831cbe7d1?w=600&auto=format&fit=crop"
+  ][i % 4]
+}));
+
+export default function DashboardOverview() {
+  const user = useAuthStore((state) => state.user);
+  const isCreator = user?.role === 'creator';
+ const {push}=useRouter()
   return (
-    <>
-      <header className="mb-12">
-        <h1 className="text-4xl font-black">Creator Dashboard</h1>
-        <p className="text-zinc-400 mt-2">
-          Welcome back, Bryson Tyler • Account Status:{" "}
-          <span className="text-yellow-500 font-bold">VERIFIED</span>
-        </p>
-      </header>
+    <div className="w-full h-full overflow-y-auto p-6">
+      <div className="max-w-6xl mx-auto grid grid-cols-12 gap-8">
+        
+        <div className="col-span-12 lg:col-span-8">
+          <header className="mb-8">
+            <h1 className="text-xl font-black uppercase tracking-tighter">
+              {isCreator ? "Creator" : "Fan"} Dashboard
+            </h1>
+            <p className="text-xs text-zinc-500 mt-1">Welcome back, {user?.name}</p>
+          </header>
 
-      {/* Stats Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-        {[
-          { label: "TOTAL SUBSCRIBERS", val: "124,892", sub: "+2.4% vs last month" },
-          { label: "30-DAY EARNINGS", val: "$48,920", sub: "Paid via direct deposit" },
-          { label: "ACTIVE VIDEOS", val: "1,204", sub: "Total media library" },
-        ].map((stat, i) => (
-          <div key={i} className="bg-zinc-900 border border-white/5 p-8 rounded-3xl">
-            <div className="text-[10px] tracking-widest text-zinc-500 font-bold mb-2 uppercase">
-              {stat.label}
+          {isCreator && (
+            <div className="p-4 border border-white/5 rounded-xl mb-6 bg-white/5">
+              <textarea 
+                placeholder="Compose new post..." 
+                className="w-full bg-transparent text-white placeholder-zinc-500 focus:outline-none resize-none text-sm" 
+                rows={2} 
+              />
+              <div className="flex items-center gap-4 text-zinc-500 mt-2">
+                <ImageIcon size={18} className="cursor-pointer hover:text-white" />
+                <Smile size={18} className="cursor-pointer hover:text-white" />
+                <Type size={18} className="cursor-pointer hover:text-white" />
+                <button className="ml-auto bg-[#F7E018] text-black font-bold px-4 py-1 rounded text-[10px] uppercase hover:bg-yellow-400 transition-colors">
+                  Post
+                </button>
+              </div>
             </div>
-            <div className="text-4xl font-black">{stat.val}</div>
-            <div className="text-xs text-yellow-600 font-medium mt-1">{stat.sub}</div>
-          </div>
-        ))}
-      </div>
+          )}
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        {/* Activity Overview */}
-        <div className="bg-zinc-900 border border-white/5 p-8 rounded-3xl">
-          <div className="font-black mb-6 flex items-center gap-2 text-sm uppercase tracking-widest">
-            <Activity size={20} className="text-yellow-500" /> RECENT ACTIVITY
-          </div>
-          <div className="space-y-6">
-            {[
-              { action: "New subscriber from YouTube", time: "2m ago" },
-              { action: "Video 'Summer Tour' processed", time: "1h ago" },
-              { action: "Payout confirmed", time: "5h ago" },
-            ].map((act, i) => (
-              <div key={i} className="flex justify-between items-center pb-4 border-b border-white/5 last:border-0">
-                <span className="text-sm font-medium text-zinc-300">{act.action}</span>
-                <span className="text-xs text-zinc-600 flex items-center gap-1"><Clock size={12}/> {act.time}</span>
+          <div className="flex flex-col">
+            {POSTS.map((post) => (
+              <div onClick={()=>push(`/dashboard/profile/${post.id}`)} key={post.id} className="border-b cursor-pointer border-white/5 py-6 hover:bg-white/[0.02] transition-colors">
+                <div className="flex justify-between items-start mb-3">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full bg-yellow-500/20 flex items-center justify-center font-black text-xs">BT</div>
+                    <div>
+                      <div className="font-bold flex items-center gap-x-2 text-sm text-white">
+                        {post.user} <VerifiedIcon className="w-5 h-5 text-yellow-400" />
+                      </div>
+                      <div className="text-[10px] text-zinc-500 flex items-center gap-1.5">
+                        {post.handle} <span>•</span> {post.time}
+                      </div>
+                    </div>
+                  </div>
+                  <MoreHorizontal size={16} className="text-zinc-500 cursor-pointer" />
+                </div>
+                
+                <p className="text-sm text-zinc-300 mb-3 leading-relaxed">{post.content}</p>
+                
+                <div className="w-full h-80 overflow-hidden rounded-xl bg-zinc-800 relative">
+                   <Image src={post.image} alt="post" fill className="object-cover" />
+                </div>
+
+                <PostActions postId={post.id} />
               </div>
             ))}
           </div>
         </div>
 
-        {/* Webhook Overview */}
-        <div className="bg-zinc-900 border border-white/5 p-8 rounded-3xl">
-          <div className="font-black mb-6 flex items-center gap-2 text-sm uppercase tracking-widest">
-            <LinkIcon size={20} className="text-yellow-500" /> WEBHOOK STATUS
+        <aside className="hidden lg:block col-span-4">
+          <div className="sticky top-6">
+            <SuggestedCreators />
           </div>
-          <div className="space-y-6">
-            <div className="flex justify-between">
-              <span className="text-xs text-zinc-500 font-bold uppercase">Endpoint</span>
-              <span className="text-xs font-mono bg-black px-2 py-1 rounded">/webhooks/bryson</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-xs text-zinc-500 font-bold uppercase">Status</span>
-              <span className="text-xs font-bold text-green-500 flex items-center gap-1"><BarChart3 size={12}/> ACTIVE</span>
-            </div>
-            <div className="p-4 bg-black rounded-xl border border-white/5 text-xs text-zinc-400">
-              Your webhook is currently listening for events and reporting a 200 OK status on all recent attempts.
-            </div>
-          </div>
-        </div>
+        </aside>
+        
       </div>
-    </>
+    </div>
   );
 }

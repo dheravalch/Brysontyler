@@ -12,7 +12,7 @@ export default function VerifyEmailPage() {
       </div>
 
       <div className="space-y-2">
-        <h2 className="text-4xl font-black uppercase tracking-tighter">
+        <h2 className="text-4xl font-black  tracking-tighter">
           Check your inbox
         </h2>
         <p className="text-zinc-400 max-w-sm mx-auto">
@@ -23,7 +23,7 @@ export default function VerifyEmailPage() {
 
       <div className="flex flex-col w-full max-w-sm gap-4">
         <Link href="/login" className="w-full">
-          <Button className="w-full">BACK TO LOGIN</Button>
+          <Button className="w-full">Back to Login</Button>
         </Link>
         <p className="text-xs text-zinc-600 uppercase font-bold tracking-widest">
           Didn&apos;t receive it? <span className="text-yellow-400 cursor-pointer underline">Resend link</span>
